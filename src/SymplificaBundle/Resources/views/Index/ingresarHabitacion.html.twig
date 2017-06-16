@@ -1,0 +1,91 @@
+{{ form_start(form1, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': id1|default('form')} }) }}
+
+{{ form_end(form1) }}
+
+<h3>Ingresar Habitacion</h3>
+<hr>
+{#<form action="{{path('index_procesarHabitacion')}}" method="post">#}
+<table>
+    <tr>
+        <td>
+            <label for="nombre">Número: </label>
+        <td>
+            <input type="text" id="numero_habitacion" placeholder="Numero" name="numero_habitacion"/>
+        </td>
+    <tr>
+        <td>
+            <label for="nombre">Capacidad: </label>
+        <td>
+            <input type="text" id="capacidad_habitacion" placeholder="Capacidad" name="capacidad_habitacion"/>
+        </td>
+    <tr>
+        <td colspan="2" align="right">
+            {#                <input type="submit" value="Agregar" class="agregarHabitacion"/>#}
+
+            <a style="background-color: purple; border-color: purple;" class="btn btn-sm btn-success batpf glyphicon glyphicon-plus agregarHabitacion">
+                {# ADICIONAR TIPO PRENDA BOTON CHULITO #}
+            </a>            
+        </td>
+    </tr>
+</table>
+{#</form>#}
+<h3>Listado de habitaciones</h3>
+<hr>
+<table border="2" width="100%" class="tablaHabitacion">
+    <tr>
+        <td width="33%"><b>ID</b>
+        <td width="34%"><b>NUMERO</b>
+        <td width="33%"><b>CAPACIDAD</b>
+        </td>
+    <tr>
+    {% for habitaciones in habitacion %}
+        <tr data-id1 = "{{ habitaciones.id }}">
+            <td>{{habitaciones.id}}</td>
+            <td>{{habitaciones.numero}}</td>
+            <td>{{habitaciones.capacidad}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<script>
+    $(".agregarHabitacion").click(function ()
+    {
+        var form = $('#adicionar-habitacion');
+        var url = form.attr('action');
+{#        var tipoPrenda = $(this).parents('table');#}
+
+{#        var IdTipoPrenda = tipoPrenda.data('id56');#}
+        var numeroHabitacion = document.getElementById('numero_habitacion').value;
+        var capacidadHabitacion = document.getElementById('capacidad_habitacion').value;
+
+        $.post(url, {numero_habitacion: numeroHabitacion, 
+                     capacidad_habitacion: capacidadHabitacion}, function (data)
+        {
+{#            $(".tablaHabitacion").append('<tr>' +
+                    '<td>'+ data[0].habitacion_id +'</td>' + 
+                    '<td>'+ data[0].habitacion_numero +'</td>' + 
+                    '<td>'+ data[0].habitacion_capacidad +'</td>' +
+                    '</tr>');#}
+  
+            $.post("refrescartablaHabitacion", function (htmlExterno) {
+                $(".tablaHabitacion").html(htmlExterno);
+            });
+    
+    
+               {# $.post("refrescarTableTipoPrenda", function (htmlExterno) {
+                $(".div-tipo-prenda-neon").html(htmlExterno);
+            });#}
+    
+            $(".menu_clase_habitacion").append('<option>'+data[0].habitacion_id+'</option>');
+            
+            }).fail(function () {
+                alert('ERROR');
+{#                row.show();#}
+            });
+    });
+</script>
+
+
+
+
+

@@ -1,0 +1,31 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: symfony
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: e4c4fd1540210fe175263d4f9b2418e2ebddb602
+
+
+
+
+
+
+
+## This file is auto-generated during the composer install
+#parameters:
+#    database_host: 107.180.51.83
+#    database_port: null
+#    database_name: symplifica
+#    database_user: Martin22
+#    database_password: Martin22
+#    mailer_transport: smtp
+#    mailer_host: 127.0.0.1
+#    mailer_user: null
+#    mailer_password: null
+#    secret: c7b51edbf716f3c62be7520827961715ccbed320

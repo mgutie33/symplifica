@@ -1,0 +1,98 @@
+{{ form_start(form2, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': id2|default('form')} }) }}
+
+{{ form_end(form2) }}
+
+<h3>Ingresar Paciente</h3>
+<hr>
+{#    <form action="{{path('index_procesarPaciente')}}" method="post">#}
+<table>
+    <tr>
+        <td>
+            <label for="nombre">Nombre: </label>
+        <td>
+            <input type="text" id="nombre_paciente" placeholder="Nombre" name="nombre_paciente" />
+        </td>
+    <tr>
+        <td>
+            <label for="nombre">Cédula: </label>
+        <td>
+            <input type="text" id="cedula_paciente" placeholder="Cedula" name="cedula_paciente" />
+        </td>
+    <tr>
+        <td>
+            <label for="nombre">Teléfono: </label>
+        <td>
+            <input type="text" id="telefono_paciente" placeholder="Telefono" name="telefono_paciente" />
+        </td>
+    <tr>
+        <td colspan="2" align="right">
+            {#                        <input type="submit" value="Agregar" class="agregarPaciente"/>#}
+            <a style="background-color: purple; border-color: purple;" class="btn btn-sm btn-success batpf glyphicon glyphicon-plus agregarPaciente">
+                {# ADICIONAR TIPO PRENDA BOTON CHULITO #}
+            </a>
+        </td>
+    </tr>
+</table>
+{#    </form>#}
+<h3>Listado de pacientes</h3>
+<hr>
+<table border="2" width="100%" class="tablaPaciente">
+    <tr>
+        <td width="20%"><b>ID</b>
+        <td width="20%"><b>NOMBRE</b>
+        <td width="20%"><b>CEDULA</b>
+        <td width="20%"><b>TELEFONO</b>
+        <td width="20%"><b>HABITACION</b>
+        </td>
+    </tr>
+    {% for pacientes in paciente %}
+        <tr data-id2 = "{{ pacientes.id }}">
+            <td>{{pacientes.id}}</td>
+            <td>{{pacientes.nombre}}</td>
+            <td>{{pacientes.cedula}}</td>
+            <td>{{pacientes.telefono}}</td>
+            <td>PENDIENTE POR ASIGNAR</td>
+        </tr>
+    {% endfor %}
+    <tr>
+</table>
+
+<script>
+    $(".agregarPaciente").click(function ()
+    {
+        var form = $('#adicionar-paciente');
+        var url = form.attr('action');
+
+        var nombrePaciente = document.getElementById('nombre_paciente').value;
+        var cedulaPaciente = document.getElementById('cedula_paciente').value;
+        var telefonoPaciente = document.getElementById('telefono_paciente').value;
+
+        $.post(url, {nombre_paciente: nombrePaciente,
+            cedula_paciente: cedulaPaciente,
+            telefono_paciente: telefonoPaciente
+        }, function (data)
+        {
+{#            $(".tablaPaciente").append('<tr>' +
+                    '<td>'+ data[0].paciente_id +'</td>' + 
+                    '<td>'+ data[0].paciente_nombre +'</td>' + 
+                    '<td>'+ data[0].paciente_cedula +'</td>' + 
+                    '<td>'+ data[0].paciente_telefono +'</td>' + 
+                    '<td>PENDIENTE POR ASIGNAR</td>' +
+                    '</tr>');#}
+  
+            $.post("refrescartablaPaciente", function (htmlExterno) {
+                $(".tablaPaciente").html(htmlExterno);
+            });
+    
+            $(".menu_clase_paciente").append('<option>'+data[0].paciente_id+'</option>');
+            
+        }).fail(function () {
+            alert('ERROR');
+
+        });
+    });
+</script>
+
+
+{#                        var varClothType_id = (data[0].clothType_id);#}
+{#                        var varClothType_name = (data[0].clothType_name);#}

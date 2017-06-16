@@ -1,0 +1,15 @@
+<table border="2" width="100%" class="tablaHabitacion">
+    <tr>
+        <td width="33%"><b>ID</b>
+        <td width="34%"><b>NUMERO</b>
+        <td width="33%"><b>CAPACIDAD</b>
+        </td>
+    <tr>
+    {% for habitaciones in habitacion %}
+        <tr data-id1 = "{{ habitaciones.id }}">
+            <td>{{habitaciones.id}}</td>
+            <td>{{habitaciones.numero}}</td>
+            <td>{{habitaciones.capacidad}}</td>
+        </tr>
+    {% endfor %}
+</table>

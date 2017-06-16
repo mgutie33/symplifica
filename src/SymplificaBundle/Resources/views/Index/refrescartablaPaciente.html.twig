@@ -1,0 +1,20 @@
+<table border="2" width="100%" class="tablaPaciente">
+    <tr>
+        <td width="20%"><b>ID</b>
+        <td width="20%"><b>NOMBRE</b>
+        <td width="20%"><b>CEDULA</b>
+        <td width="20%"><b>TELEFONO</b>
+        <td width="20%"><b>HABITACION</b>
+        </td>
+    </tr>
+    {% for pacientes in paciente %}
+        <tr data-id2 = "{{ pacientes.id }}">
+            <td>{{pacientes.id}}</td>
+            <td>{{pacientes.nombre}}</td>
+            <td>{{pacientes.cedula}}</td>
+            <td>{{pacientes.telefono}}</td>
+            <td>PENDIENTE POR ASIGNAR</td>
+        </tr>
+    {% endfor %}
+    <tr>
+</table>

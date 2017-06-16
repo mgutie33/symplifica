@@ -1,0 +1,11 @@
+symplifica_homepage:
+    path:     /
+    defaults: { _controller: SymplificaBundle:Default:index }
+
+index:
+    resource: "routes/index.yml"
+    prefix:   /index
+            
+administration:
+    resource: "routes/administration.yml"
+    prefix:   /administration

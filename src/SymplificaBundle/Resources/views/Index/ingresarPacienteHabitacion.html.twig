@@ -1,0 +1,95 @@
+{{ form_start(form3, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': id3|default('form')} }) }}
+
+{{ form_end(form3) }}
+
+<h3>Ingresar Paciente en Habitacion</h3>
+<hr>
+
+<table>
+    <tr>
+        <td>
+            <label for="nombre">Habitación: </label>
+        <td>
+            {#            <input type="text" id="id_habitacion" placeholder="Habitacion" name="id_habitacion" />#}
+            <select class="form-control menu_clase_habitacion" name="Habitacion" width="100%" id="id_habitacion">
+                {% for habitaciones in habitacion %}
+                    <option>{{habitaciones.id}}</option>
+                {% endfor %}
+            </select>
+        </td>
+    <tr>
+        <td>
+            <label for="nombre">Paciente: </label>
+        <td>
+            {#            <input type="text" id="id_paciente" placeholder="Paciente" name="id_paciente" />#}
+            <select class="form-control menu_clase_paciente" name="Paciente" width="100%" id="id_paciente">
+                {% for pacientes in paciente %}
+                    <option>{{pacientes.id}}</option>
+                {% endfor %}
+            </select>
+        </td>
+    <tr>
+        <td colspan="2" align="right">
+
+            <a style="background-color: purple; border-color: purple;" class="btn btn-sm btn-success batpf glyphicon glyphicon-plus agregarPacienteHabitacion">
+
+            </a>
+        </td>
+    </tr>
+</table>
+
+<h3>Historial de asignaciones</h3>
+<hr>
+<table border="2" width="100%" class="tablaHabitacionPaciente">
+    <tr>
+        <td width="20%"><b>ID</b>
+        <td width="20%"><b>HABITACION</b>
+        <td width="20%"><b>PACIENTE</b>
+        </td>
+    </tr>
+    {% for asignacion in habitacionPaciente %}
+        <tr data-id3 = "{{ asignacion.id }}">
+            <td>{{asignacion.id}}</td>
+            <td>{{asignacion.habitacion}}</td>
+            <td>{{asignacion.paciente}}</td>
+        </tr>
+    {% endfor %}
+    <tr>
+</table>
+
+<script>
+    $(".agregarPacienteHabitacion").click(function ()
+    {
+        var form = $('#adicionar-paciente-habitacion');
+        var url = form.attr('action');
+
+        var idHabitacion = (document.getElementById('id_habitacion').value) * 1;
+        var idPaciente = (document.getElementById('id_paciente').value) * 1;
+
+        $.post(url, {id_habitacion: idHabitacion,
+            id_paciente: idPaciente
+        }, function (data)
+        {
+            
+            $.post("refrescartablaHabitacion", function (htmlExterno) {
+                $(".tablaHabitacion").html(htmlExterno);
+            });
+            
+            if (data[0].habitacionPaciente_id == null)
+            {
+                alert("Esta habitacion no tiene más capacidad");
+            } else
+            {
+                $(".tablaHabitacionPaciente").append('<tr>' +
+                        '<td>' + data[0].habitacionPaciente_id + '</td>' +
+                        '<td>' + data[0].habitacionPaciente_id_habitacion + '</td>' +
+                        '<td>' + data[0].habitacionPaciente_id_paciente + '</td>' +
+                        '</tr>');
+            }
+        }).fail(function () {
+            alert('ERROR');
+
+        });
+    });
+
+</script>

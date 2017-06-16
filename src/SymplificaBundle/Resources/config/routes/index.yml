@@ -1,0 +1,34 @@
+index_menuPrincipal:
+    path:     /menuPrinicpal
+    defaults: { _controller: SymplificaBundle:Symplifica:menuPrincipal }
+
+index_ingresarHabitacion:
+    path:     /ingresarHabitacion
+    defaults: { _controller: SymplificaBundle:Symplifica:ingresarHabitacion }
+    
+index_procesarHabitacion:
+    path:     /procesarHabitacion
+    defaults: { _controller: SymplificaBundle:Symplifica:procesarHabitacion }
+    methods: POST
+    
+index_ingresarPaciente:
+    path:     /ingresarPaciente
+    defaults: { _controller: SymplificaBundle:Symplifica:ingresarPaciente }
+    
+index_procesarPaciente:
+    path:     /procesarPaciente
+    defaults: { _controller: SymplificaBundle:Symplifica:procesarPaciente }
+    methods: POST
+
+index_procesarHabitacionPaciente:
+    path:     /procesarHabitacionPaciente
+    defaults: { _controller: SymplificaBundle:Symplifica:procesarHabitacionPaciente }
+    methods: POST
+
+index_refrescartablaHabitacion:
+    path:     /refrescartablaHabitacion
+    defaults: { _controller: SymplificaBundle:Symplifica:refrescartablaHabitacion }
+
+index_refrescartablaPaciente:
+    path:     /refrescartablaPaciente
+    defaults: { _controller: SymplificaBundle:Symplifica:refrescartablaPaciente }

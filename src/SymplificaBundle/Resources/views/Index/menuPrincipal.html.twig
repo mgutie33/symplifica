@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <table border="2" width="100%">
+        <tr>
+            <td width="35%">
+                {{ include('SymplificaBundle:Index:ingresarHabitacion.html.twig', { 
+                    form1: add_habitacion_form_ajax,
+                    id1: 'adicionar-habitacion'
+                }) }}
+            <td width="35%">
+                {{ include('SymplificaBundle:Index:ingresarPaciente.html.twig', { 
+                    form2: add_paciente_form_ajax,
+                    id2: 'adicionar-paciente'
+                }) }}
+            <td width="30%">
+                {{ include('SymplificaBundle:Index:ingresarPacienteHabitacion.html.twig', { 
+                    form3: add_paciente_habitacion_form_ajax,
+                    id3: 'adicionar-paciente-habitacion'
+                }) }}
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
